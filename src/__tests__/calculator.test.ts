@@ -24,4 +24,27 @@ let dataset = [
   { x: 81, y: 227, method: "divide" },
 ];
 
-describe("Calculator", () => {});
+describe("Calculator", () =>{
+  dataset.forEach(currentProblem =>{
+    switch (currentProblem.method) {
+      case "add":
+        it("should add x,y",() => {
+          expect(calculator.add(currentProblem.x, currentProblem.y)).toBe(currentProblem.x + currentProblem.y)
+        })
+      case "subtract":
+        it("should subtract x,y", () => {
+          expect(calculator.subtract(currentProblem.x, currentProblem.y)).toBe(currentProblem.x - currentProblem.y)
+        })
+      case "multiply":
+        it("should multiply x,y", () => {
+          expect(calculator.multiply(currentProblem.x, currentProblem.y)).toBe(currentProblem.x * currentProblem.y)
+        })
+      case "divide":
+        it("should divide x,y", () => {
+          expect(calculator.divide(currentProblem.x, currentProblem.y)).toBe(currentProblem.x / currentProblem.y)
+        })
+      default:
+        return;
+    }
+  })
+});

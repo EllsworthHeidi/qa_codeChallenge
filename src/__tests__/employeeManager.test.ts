@@ -4,22 +4,26 @@ const em = new EmployeeHandler();
 
 describe("Employee Manager", () => {
   beforeEach(async () => {
-    await em.navigate();
+    await em.navigate(
+      "https://devmountain-qa.github.io/employee-manager/1.2_Version/index.html"
+    );
+    
   });
   afterAll(async () => {
     await em.quit();
   });
   it("can add a new employee", async () => {
-    await em.addEmployee();
-    await em.selectEmployeeByName("New Employee");
-    await em.editEmployee({
+    await em.addEmployee()
+    await em.selectEmployeeByName("New Employee")
+    await em.editEmployee({      
       name: "test person",
       phone: "1234567890",
       title: "test result",
     });
-    await em.saveChanges();
+    
     await em.selectEmployeeByName("Dollie Berry");
     await em.selectEmployeeByName("test person");
+    await em.saveChanges();
     let employee = await em.getEmployeeInfo();
     expect(employee.name).toEqual("test person");
     expect(employee.phone).toEqual("1234567890");
